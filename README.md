@@ -6,30 +6,8 @@ Pythonから利用可能なリバーシ(オセロ)のライブラリです。局
 ## インストール
 以下のコマンドを実行する前に、C/C++のコンパイラをインストールしてください。特にWindowsであれば、MSVCのcl.exeにパスを通しておいてください。
 
-### Cythonのインストール
-```
-pip install cython
-```
-
-### NumPyのインストール
-```
-pip install numpy
-```
-
-### PyRevのインストール
 ```
 pip install git+https://github.com/Yoka346/PyRev
-```
-
-Cythonがインストールされているのにも関わらず、PyRevのインストールの際に"No module named 'Cython'"というエラーが発生する場合があります。
-その場合は以下のコマンドを実行し、pip、setuptools、wheelのアップデートをしてください。
-
-```
-pip install --upgrade pip setuptools wheel
-```
-
-```
-pip install --upgrade cython
 ```
 
 ## 各種定数及び基本的な型
