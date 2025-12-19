@@ -6,7 +6,7 @@ Pythonから利用可能なリバーシ(オセロ)のライブラリです。局
 ## インストール
 以下のコマンドを実行する前に、C/C++のコンパイラをインストールしてください。特にWindowsであれば、MSVCのcl.exeにパスを通しておいてください。
 
-### pipを用いる場合位
+### pipを用いる場合
 ```
 pip install git+https://github.com/Yoka346/PyRev
 ```
