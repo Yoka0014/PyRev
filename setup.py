@@ -9,7 +9,7 @@ class my_build_ext(build_ext):
         if self.compiler.compiler_type == "unix":
             for e in self.extensions:
                 e.extra_compile_args = ["-std=c++20", 
-                                        "-mssse3", "-msse4.1", "-msse4.2", "-mbmi", "-mbmi2", "-mavx2", 
+                                        "-march=native", 
                                         "-O2"]
         elif self.compiler.compiler_type == "msvc":
             for e in self.extensions:
