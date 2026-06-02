@@ -8,12 +8,12 @@ Pythonから利用可能なリバーシ(オセロ)のライブラリです。局
 
 ### pipを用いる場合
 ```
-pip install git+https://github.com/Yoka346/PyRev
+pip install git+https://github.com/Yoka0014/PyRev
 ```
 
 ### uvを用いる場合
 ```
-uv add git+https://github.com/Yoka346/PyRev
+uv add git+https://github.com/Yoka0014/PyRev
 ```
 
 ## 各種定数及び基本的な型
