@@ -5,3 +5,4 @@
 /pyrev/pyrev.cpp
 pyrev/.DS_Store
 *.so
+*.pyd
