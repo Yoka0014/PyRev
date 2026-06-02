@@ -1,4 +1,5 @@
 #include "config.h"
+#include "utils/crc32.h"
 
 #include <iostream>
 
@@ -12,6 +13,10 @@ void __print_intrin()
 
 #ifdef USE_AVX2
     cout << "AVX2" << endl;
+#endif
+
+#ifdef USE_AVX
+    cout << "AVX" << endl;
 #endif
 
 #ifdef USE_SSE42

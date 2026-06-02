@@ -1,4 +1,7 @@
 #pragma once
+
+#include <cstdint>
+
 #include "constant.h"
 #include "mobility.h"
 #include "flip.h"
@@ -6,20 +9,13 @@
 #include "utils/bitmanip.h"
 #include "utils/array.h"
 #include "utils/unroller.h"
-#include <cstdint>
+#include "utils/crc32.h"
 
 namespace reversi
 {
     struct __Bitboard
     {
     private:
-        static constexpr size_t HASH_RANK_LEN_0 = 16;
-        static constexpr size_t HASH_RANK_LEN_1 = 256;
-
-        // 局面のハッシュ値を求める際に用いる乱数表. 盤面のランクがキーとなっている.
-        // ランクとはチェス用語で盤面の水平方向のライン.
-        static utils::Array<uint64_t, HASH_RANK_LEN_0, HASH_RANK_LEN_1> HASH_RANK;
-
 		static uint64_t delta_swap(uint64_t x, uint64_t mask, int delta)
 		{
 			auto t = (x ^ (x >> delta)) & mask;
@@ -59,8 +55,6 @@ namespace reversi
     public:
         uint64_t player;
         uint64_t opponent;
-
-        static void init_hash_rank(utils::Array<uint64_t, __Bitboard::HASH_RANK_LEN_1>* hash_rank, size_t len);
 
 		__Bitboard() : player(0ULL), opponent(0ULL) { }
         __Bitboard(uint64_t player, uint64_t opponent) : player(player), opponent(opponent) {  }
@@ -158,19 +152,9 @@ namespace reversi
 
 		uint64_t calc_hash_code() const
 		{
-			auto p = reinterpret_cast<const uint8_t*>(this);
-			auto h0 = 0ULL;
-			auto h1 = 0ULL;
-			utils::LoopUnroller<8>()(
-				[&](const int32_t i)
-				{
-					const auto j = static_cast<size_t>(i) << 1;
-                    h0 ^= HASH_RANK[j][p[j]];
-                    h1 ^= HASH_RANK[j + 1][p[j + 1]];
-				});
-			return h0 ^ h1;
+            uint64_t p = this->player, o = this->opponent;
+            uint64_t crc = CRC32(0, p);
+            return (crc << 32) | CRC32(crc, o);
 		}
     };
-
-	inline utils::Array<uint64_t, __Bitboard::HASH_RANK_LEN_0, __Bitboard::HASH_RANK_LEN_1> __Bitboard::HASH_RANK(__Bitboard::init_hash_rank);
 }

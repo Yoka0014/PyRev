@@ -21,7 +21,7 @@ class my_build_ext(build_ext):
         build_ext.build_extensions(self)
 
 ext = Extension("pyrev.pyrev", 
-                sources=["pyrev/pyrev.pyx", "pyrev/cpp/config.cpp", "pyrev/cpp/bitboard.cpp", "pyrev/cpp/flip.cpp", "pyrev/cpp/mobility.cpp", "pyrev/cpp/utils/random.cpp"],
+                sources=["pyrev/pyrev.pyx", "pyrev/cpp/config.cpp", "pyrev/cpp/flip.cpp", "pyrev/cpp/mobility.cpp"],
                 include_dirs=["pyrev/cpp", "pyrev/cpp/utils", np.get_include()], language="c++")
  
 setup(

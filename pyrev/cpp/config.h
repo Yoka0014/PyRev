@@ -6,6 +6,8 @@
 
 #ifdef __AVX2__
 #define USE_AVX2
+#elif defined(__AVX__)
+#define USE_AVX
 #elif defined(__SSE4_2__)
 #define USE_SSE42
 #elif defined(__SSE4_1__)
@@ -19,6 +21,10 @@
 
 // 使用可能な命令セットよりも古い命令セットを全てdefine
 #ifdef USE_AVX2
+#define USE_AVX
+#endif
+
+#ifdef USE_AVX
 #define USE_SSE42
 #endif
 
@@ -34,9 +40,7 @@
 #define USE_SSE2
 #endif
 
-
 void __print_intrin();
-
 
 // 強制インライン化に関するマクロ
 #if defined(_MSC_VER) && !defined(__INTEL_COMPILER)
